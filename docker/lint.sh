@@ -22,6 +22,7 @@ SRC_DIR="${ROOT_DIR}/docker/ros"
 HADOLINT_CONFIG="${ROOT_DIR}/docker/.hadolint.yaml"
 
 # Services attendus — doit rester cohérent avec les répertoires dans docker/ros/
+# zenoh-router est exclu : image officielle Eclipse, pas de RUN apt-get à analyser
 SERVICES=(core motion perception)
 
 PASS=0

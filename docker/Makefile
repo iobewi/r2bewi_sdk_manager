@@ -4,7 +4,7 @@ IMAGE_TAG      ?= latest
 MODULE          := $(shell pwd)
 
 REGISTRY       = $(REGISTRY_HOST):$(REGISTRY_PORT)
-SERVICES       = core motion perception
+SERVICES       = zenoh-router core motion perception
 
 PLATFORM       ?= linux/arm64
 ARM64_SVC      ?= core
