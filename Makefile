@@ -11,7 +11,7 @@ BOOTSTRAP_USER ?= ubuntu
 
 help:
 	@echo ""
-	@echo "R2BEWI SDK"
+	@echo "R2BEWI SDK MANAGER"
 	@echo ""
 	@echo "  Bootstrap (CLI r2bewi)"
 	@echo "    bootstrap-build       Construit le paquet .deb et le binaire .pyz"

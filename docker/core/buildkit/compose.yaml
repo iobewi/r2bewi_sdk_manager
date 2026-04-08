@@ -1,17 +1,17 @@
 services:
   containers-test:
     build:
-      context: ../..
+      context: ../../..
       dockerfile: containers/docker/Dockerfile
     image: r2bewi-containers-build:latest
     working_dir: /workspace
     volumes:
-      - ../..:/workspace
+      - ../../..:/workspace
     command: bash containers/src/tests/lint.sh
 
   containers-build:
     build:
-      context: ../..
+      context: ../../..
       dockerfile: containers/docker/Dockerfile
     image: r2bewi-containers-build:latest
     container_name: r2bewi-containers-build
@@ -20,5 +20,5 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../..:/workspace
+      - ../../..:/workspace
       - /var/run/docker.sock:/var/run/docker.sock

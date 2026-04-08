@@ -7,22 +7,22 @@
 #                     Docker et les règles shellcheck intégrées.
 #
 # La configuration des règles ignorées se trouve dans :
-#   containers/src/.hadolint.yaml
+#   docker/.hadolint.yaml
 #
 # Usage :
-#   bash containers/src/tests/lint.sh
+#   bash docker/lint.sh
 #
 # Prérequis :
 #   hadolint (disponible dans le container containers-build)
 
 set -uo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-SRC_DIR="${ROOT_DIR}/containers/src"
-HADOLINT_CONFIG="${SRC_DIR}/.hadolint.yaml"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SRC_DIR="${ROOT_DIR}/docker/ros"
+HADOLINT_CONFIG="${ROOT_DIR}/docker/.hadolint.yaml"
 
-# Services attendus — doit rester cohérent avec SERVICES dans containers/Makefile
-SERVICES=(ros-core motion perception)
+# Services attendus — doit rester cohérent avec les répertoires dans docker/ros/
+SERVICES=(core motion perception)
 
 PASS=0
 FAIL=0

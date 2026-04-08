@@ -4,23 +4,22 @@
 
 ---
 
-## Ce que contient ce dépôt
+## Structure du dépôt
 
-| Module | Rôle |
+| Répertoire | Rôle |
 |---|---|
-| `bootstrap/` | CLI `r2bewi` — provisioning du cluster K3s (init, deploy, enroll, labels, uninstall) |
-| `containers/` | Construction et publication des images Docker des services ROS2 |
-| `docker/` | Environnement de build conteneurisé (Ubuntu 24.04) |
+| `bootstrap/` | CLI `r2bewi` — provisioning du cluster K3s (init, deploy, enroll, validate, status) |
+| `docker/` | Images Docker (SDK build, ROS2), BuildKit, lint Dockerfiles |
+| `containers/` | Manifests K3s (jobs de test, accès Headlamp) |
+| `docs/` | Runbook, labels K3s, whitebook, guide contributeur |
 
 ---
 
 ## Architecture cible
 
-Trois classes de nœuds :
-
 | Classe | Architecture | Rôle |
 |---|---|---|
-| **Bastion** | x86 | Point central : K3s server, bridge réseau, dnsmasq, registry OCI |
+| **Bastion** | x86 | K3s server, bridge réseau, dnsmasq, registry OCI |
 | **Nœud motion / I/O** | ARM | Commande moteur, interfaces matérielles, contrôle bas niveau |
 | **Nœud perception** | ARM + GPU | Acquisition caméra, traitement image, inférence |
 
@@ -57,37 +56,46 @@ Trois classes de nœuds :
 
 ### Développement
 
-- Docker avec BuildKit
-- Ou utiliser l'environnement conteneurisé : `docker compose -f docker/build/compose.yaml run r2bewi-build`
+- Python 3.10+ et `make`
+- Docker avec BuildKit (ou utiliser l'environnement conteneurisé)
+
+```bash
+# Lancer l'environnement de build SDK
+make -C docker build-env
+make -C docker shell
+```
 
 ---
 
 ## Commandes disponibles
 
-### Bootstrap (CLI r2bewi)
+### Bootstrap — CLI `r2bewi`
 
 | Commande | Description |
 |---|---|
 | `make bootstrap-build` | Construit le binaire auto-extractible (`dist/r2bewi`) |
-| `make bootstrap-test` | Lance la suite pytest |
+| `make bootstrap-test` | Lance la suite pytest + couverture |
 | `make bootstrap-lint` | Vérifie la syntaxe Python |
 
 > Avant `make bootstrap-test` : `pip install -r bootstrap/requirements-dev.txt`
 
-### Containers (Docker)
+### Docker — Images ROS2
 
 | Commande | Description |
 |---|---|
-| `make containers-build` | Construit les images Docker des services |
-| `make containers-push` | Publie les images sur le registry du bastion |
-| `make containers-clean` | Supprime les images locales |
-| `make containers-test` | Lint des Dockerfiles (hadolint) |
+| `make -C docker build` | Construit toutes les images ROS2 (x86) |
+| `make -C docker push` | Publie les images sur le registry du bastion |
+| `make -C docker build-arm64` | Construit et pousse l'image ARM64 (VPN requis) |
+| `make -C docker test` | Lint des Dockerfiles avec hadolint |
+| `make -C docker clean` | Supprime les images locales |
 
-### Accès SSH
+### K3s — Manifests
 
 | Commande | Description |
 |---|---|
-| `make ssh-setup` | Installe la clé SSH locale sur le bastion (une seule fois) |
+| `make -C containers deploy-test` | Déploie le job de test ARM64 sur le cluster (VPN requis) |
+| `make -C containers logs-test` | Affiche les logs du job de test |
+| `make -C containers clean-test` | Supprime le job de test |
 
 ### Variables
 
@@ -123,11 +131,11 @@ sudo r2bewi deploy r2arm01 --ip 192.168.82.101
 sudo r2bewi enroll r2arm01 --ip 192.168.82.101
 ```
 
-### 3. Construire et publier les images de services
+### 3. Construire et publier les images
 
 ```bash
-make containers-build
-make containers-push
+make -C docker build
+make -C docker push
 ```
 
 ---
@@ -138,4 +146,3 @@ make containers-push
 - [`docs/labels.md`](docs/labels.md) — convention de labels K3s `r2bewi.io/`
 - [`docs/whitebook.md`](docs/whitebook.md) — vision architecture R2BEWI
 - [`docs/contributing.md`](docs/contributing.md) — standards code, tests, hooks pré-commit
-- [`containers/README.md`](containers/README.md) — build et publication des images

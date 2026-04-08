@@ -3,7 +3,7 @@ services:
     privileged: true
     network_mode: host
     build:
-      context: ../..
+      context: ../../..
       dockerfile: docker/Dockerfile
 
     image: r2bewi-sdk-manager:24.04
@@ -15,7 +15,7 @@ services:
     tty: true
     
     volumes:
-      - ../..:/workspace
+      - ../../..:/workspace
       - /var/run/docker.sock:/var/run/docker.sock
       - sdk-r2bewi_claude-config:/root/.claude
 
