@@ -10,5 +10,3 @@ ENV RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
 SHELL ["/bin/bash", "-c"]
 RUN echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc
-
-CMD ["ros2", "launch"]
