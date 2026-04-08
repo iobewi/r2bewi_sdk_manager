@@ -1,0 +1,18 @@
+{
+  "name": "r2bewi-sdk-manager",
+  "dockerComposeFile": "../../docker/compose.yaml",
+  "service": "r2bewi-sdk-manager",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.ansible",
+        "ms-python.python",
+        "timonwong.shellcheck"
+      ]
+    }
+  },
+  "remoteEnv": {
+    "HOST_WORKSPACE_PATH": "${localWorkspaceFolder}"
+  }
+}
