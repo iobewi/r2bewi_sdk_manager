@@ -22,7 +22,7 @@ docker/
 
 | Image | Base | Cible | Description |
 |---|---|---|---|
-| `zenoh-router` | `eclipse/zenoh` | Bastion x86 | Router Zenoh — point central du middleware ROS2 |
+| `zenoh-router` | `r2bewi/core` | Bastion x86 | Router Zenoh (`rmw_zenohd`) — point central du middleware ROS2 |
 | `core` | `ros:jazzy` | Bastion x86 | Services ROS2 centraux et socle commun |
 | `motion` | `r2bewi/core` | ARM | Commande moteur, actionneurs et interfaces matérielles |
 | `perception` | `nvcr.io/nvidia/l4t-pytorch` | ARM + GPU | Acquisition caméra, traitement image, inférence GPU |
@@ -38,8 +38,8 @@ graph TD
     JAZZY["ros:jazzy"]
     L4T["nvcr.io/nvidia/l4t-pytorch"]
 
-    ZENOH["eclipse/zenoh"] --> ROUTER["zenoh-router — middleware"]
     JAZZY --> CORE["core — services ROS2 centraux"]
+    CORE --> ROUTER["zenoh-router — rmw_zenohd"]
     CORE --> MOTION["motion — commande et I/O"]
     L4T --> PERCEPTION["perception — caméra, inférence GPU"]
 ```

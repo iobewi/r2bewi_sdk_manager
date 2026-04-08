@@ -1,14 +1,12 @@
-FROM eclipse/zenoh:latest
+ARG REGISTRY=registry.r2bewi.internal:5000
+FROM ${REGISTRY}/r2bewi/core:latest
 
-# Configuration par défaut — peut être surchargée via volume :
-#   docker run -v ./zenoh.json5:/zenoh.json5 r2bewi/zenoh-router
-#
-# Points d'écoute :
-#   TCP  0.0.0.0:7447  — agents ROS2 (rmw_zenoh_cpp)
-#   HTTP 0.0.0.0:8000  — API REST (monitoring optionnel)
+# Le router Zenoh est fourni par ros-jazzy-rmw-zenoh-cpp (déjà installé dans core).
+# Sans ce router, les nœuds ne peuvent pas se découvrir — la découverte multicast
+# est désactivée par défaut dans rmw_zenoh_cpp.
 
 EXPOSE 7447/tcp
 EXPOSE 7447/udp
-EXPOSE 8000/tcp
 
-CMD ["zenohd"]
+SHELL ["/bin/bash", "-c"]
+CMD ["source /opt/ros/jazzy/setup.bash && ros2 run rmw_zenoh_cpp rmw_zenohd"]
