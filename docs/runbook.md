@@ -1,4 +1,4 @@
-# Runbook R2BEWI
+# Runbook R2BEWI-SDK-MANAGER
 
 Procédure d'installation de la stack robotique R2BEWI depuis zéro.
 

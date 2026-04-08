@@ -1,4 +1,4 @@
-# R2BEWI SDK
+# R2BEWI SDK MANAGER
 
 **Kit d'infrastructure pour déployer et opérer une plateforme robotique distribuée basée sur K3s et ROS2.**
 

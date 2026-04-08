@@ -1,13 +1,13 @@
 services:
-  r2bewi-build:
+  r2bewi-sdk-manager:
     privileged: true
     network_mode: host
     build:
       context: ../..
-      dockerfile: docker/build/Dockerfile
+      dockerfile: docker/Dockerfile
 
-    image: r2bewi-sdk-build:24.04
-    container_name: r2bewi-build
+    image: r2bewi-sdk-manager:24.04
+    container_name: r2bewi-sdk-manager
     working_dir: /workspace
     user: root
 
@@ -21,7 +21,6 @@ services:
 
     environment:
       HOME: /root
-      PACKER_PLUGIN_PATH: /root/.config/packer/plugins
       ANTHROPIC_MODEL: claude-sonnet-4-6
 
     devices:

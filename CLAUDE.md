@@ -1,4 +1,4 @@
-# R2BEWI SDK
+# R2BEWI SDK MANAGER
 
 SDK de gestion de stack robotique distribuée K3s (Raspberry Pi / Jetson).
 

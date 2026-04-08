@@ -1,4 +1,4 @@
-# Guide contributeur — R2BEWI SDK
+# Guide contributeur — R2BEWI SDK MANAGER
 
 Ce document couvre les conventions de code, la stratégie de tests et la configuration
 de l'environnement de développement local.

@@ -1,11 +1,11 @@
 ## 1. Page de couverture
 
-**R2BEWI — Vers une infrastructure explicite pour les systèmes robotiques distribués**
+**R2BEWI-SDK-MANAGER — Vers une infrastructure explicite pour les systèmes robotiques distribués**
 
 *Structurer la séparation des contraintes physiques et logicielles pour des déploiements reproductibles, maîtrisés et opérables.*
 
 **Auteur :** Lionel Orcil
-**Organisation :** R2BEWI
+**Organisation :** IOBEWI
 **Date :** Avril 2026
 
 ---
