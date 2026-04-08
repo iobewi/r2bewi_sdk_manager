@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+        files: \.(yaml|yml)$
+      - id: end-of-file-fixer
+        exclude: \.pyz$
+      - id: trailing-whitespace
+        exclude: \.pyz$
+
+  - repo: local
+    hooks:
+      - id: python-lint
+        name: Python syntax check
+        language: system
+        entry: bash -c 'python3 -m py_compile "$@"' --
+        types: [python]
+        pass_filenames: true
+
+      - id: pytest-fast
+        name: Tests rapides (no coverage)
+        language: system
+        entry: bash -c 'cd bootstrap && python3 -m pytest -q --no-cov -x'
+        pass_filenames: false
+        always_run: true

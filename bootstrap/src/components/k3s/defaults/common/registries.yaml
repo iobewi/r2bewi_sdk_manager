@@ -1,0 +1,6 @@
+# r2bewi — registry mirror local
+# registry.r2bewi.internal résolu par dnsmasq vers le bastion
+mirrors:
+  "registry.r2bewi.internal:5000":
+    endpoint:
+      - "http://registry.r2bewi.internal:5000"

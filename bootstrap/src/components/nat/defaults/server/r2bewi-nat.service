@@ -1,0 +1,12 @@
+[Unit]
+Description=R2BEWI NAT masquerade (LAN robot)
+After=k3s.service
+Wants=k3s.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'iptables -t nat -C POSTROUTING -s __LAN_SUBNET__ ! -o __BRIDGE_IFACE__ -j MASQUERADE 2>/dev/null || iptables -t nat -A POSTROUTING -s __LAN_SUBNET__ ! -o __BRIDGE_IFACE__ -j MASQUERADE'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

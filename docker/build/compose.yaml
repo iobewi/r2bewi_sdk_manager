@@ -1,0 +1,44 @@
+services:
+  r2bewi-build:
+    privileged: true
+    network_mode: host
+    build:
+      context: ../..
+      dockerfile: docker/build/Dockerfile
+
+    image: r2bewi-sdk-build:24.04
+    container_name: r2bewi-build
+    working_dir: /workspace
+    user: root
+
+    stdin_open: true
+    tty: true
+    
+    volumes:
+      - ../..:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+      - sdk-r2bewi_claude-config:/root/.claude
+
+    environment:
+      HOME: /root
+      PACKER_PLUGIN_PATH: /root/.config/packer/plugins
+      ANTHROPIC_MODEL: claude-sonnet-4-6
+
+    devices:
+      - /dev/kvm:/dev/kvm
+      - /dev/loop-control:/dev/loop-control
+      - /dev/loop0:/dev/loop0
+      - /dev/loop1:/dev/loop1
+      - /dev/loop2:/dev/loop2
+      - /dev/loop3:/dev/loop3
+
+    cap_add:
+      - SYS_ADMIN
+
+    security_opt:
+      - apparmor:unconfined
+
+    command: /bin/bash
+
+volumes :
+  sdk-r2bewi_claude-config:

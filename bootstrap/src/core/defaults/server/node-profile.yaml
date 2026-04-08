@@ -1,0 +1,15 @@
+# Profil matériel du nœud — R2BEWI
+# Remplir ce fichier avant d'exécuter : sudo r2bewi enroll __HOSTNAME__
+# Les valeurs autorisées sont définies dans catalog/labels.yaml
+
+# Ressources de calcul (obligatoire)
+compute:
+  # Valeurs : none, nvidia, intel
+  accelerator: "none"
+  # Valeurs : micro, embedded, general, high
+  class: "high"
+  # Valeurs : true, false
+  realtime: "false"
+
+# Équipements intégrés (optionnel — ne déclarer que ce qui est présent)
+device:

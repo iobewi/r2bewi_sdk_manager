@@ -1,0 +1,16 @@
+name: nat
+description: NAT masquerade — iptables pour le LAN robot
+kind: [server]
+deploy_order: 40
+setup: setup.deploy
+defaults:
+  server:
+    - r2bewi-nat.service
+packages:
+  - iptables
+  - iptables-persistent
+managed_paths:
+  server:
+    - /etc/systemd/system/r2bewi-nat.service
+    - /etc/iptables/rules.v4
+cli: {}

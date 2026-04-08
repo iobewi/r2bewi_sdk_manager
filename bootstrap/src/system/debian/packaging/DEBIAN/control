@@ -1,0 +1,10 @@
+Package: r2bewi
+Version: 0.1.0
+Section: misc
+Priority: optional
+Architecture: amd64
+Depends: python3 (>= 3.10), python3-yaml, openssh-client
+Maintainer: iobewi <iobewi@r2bewi>
+Description: R2BEWI — CLI de gestion de stack robotique distribuée K3s/ROS
+ Gère l'installation, l'enrôlement, la mise à jour et l'exploitation
+ d'un cluster K3s dédié à l'orchestration ROS.

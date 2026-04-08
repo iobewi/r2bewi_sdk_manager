@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+# Ne pas supprimer /etc/r2bewi — contient la config des nœuds
+echo "r2bewi: les configurations dans /etc/r2bewi/ sont conservées"
+echo "r2bewi: supprimer manuellement si souhaité : rm -rf /etc/r2bewi/"

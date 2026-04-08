@@ -1,0 +1,31 @@
+# r2bewi — réseau bastion
+# Editer selon votre matériel :
+#   - uplink : interface + type (dhcp4 pour eth, ou bloc access-points pour wifi)
+#   - bridge members : interfaces LAN robot à ajouter à br0
+# __IP__ et __HOSTNAME__ sont substitués par r2bewi init
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # Uplink vers internet (DHCP)
+    eth0:
+      dhcp4: true
+      dhcp6: false
+    # Membres du bridge LAN robot (désactiver DHCP)
+    eth1:
+      dhcp4: false
+      dhcp6: false
+  bridges:
+    br0:
+      addresses:
+        - "__IP__/24"
+      dhcp4: false
+      dhcp6: false
+      nameservers:
+        addresses: [127.0.0.1]
+        search: [r2bewi.internal]
+      interfaces:
+        - eth1
+      parameters:
+        forward-delay: "0"
+        stp: false

@@ -1,0 +1,15 @@
+name: wireguard
+description: VPN WireGuard — accès distant sécurisé au LAN robot
+kind: [server]
+deploy_order: 70
+setup: null
+defaults: {}
+packages:
+  - wireguard-tools
+managed_paths:
+  server:
+    - /etc/wireguard/wg0.conf
+    - /etc/wireguard/wg0.key
+    - /etc/wireguard/wg0.pub
+cli:
+  wg-peer: peer

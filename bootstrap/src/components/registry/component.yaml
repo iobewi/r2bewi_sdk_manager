@@ -1,0 +1,13 @@
+name: registry
+description: Registry OCI local — docker-registry sur LVM
+kind: [server]
+deploy_order: 60
+setup: null
+defaults: {}
+packages:
+  - docker-registry
+  - lvm2
+managed_paths:
+  server:
+    - /etc/docker/registry/config.yml
+cli: {}

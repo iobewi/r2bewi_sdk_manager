@@ -1,0 +1,35 @@
+name: k3s
+description: Orchestrateur K3s — server et agent
+kind: [server, agent]
+deploy_order: 50
+setup: setup.deploy
+defaults:
+  common:
+    - registries.yaml
+  server:
+    - k3s-config.yaml
+  agent:
+    - k3s-config.yaml
+packages:
+  - curl
+  - ca-certificates
+node_files:
+  common:
+    registries.yaml: /etc/rancher/k3s/registries.yaml
+  server:
+    k3s-config.yaml: /etc/rancher/k3s/config.yaml
+  agent:
+    k3s-config.yaml: /etc/rancher/k3s/config.yaml
+managed_paths:
+  common:
+    - /etc/rancher/k3s/registries.yaml
+  server:
+    - /etc/rancher/k3s/config.yaml
+  agent:
+    - /etc/rancher/k3s/config.yaml
+cli:
+  enroll: enroll
+  headlamp-token: headlamp
+  uninstall: uninstall
+  render-labels: render_labels
+  update: update

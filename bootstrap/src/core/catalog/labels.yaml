@@ -1,0 +1,153 @@
+# Catalogue machine-readable des labels R2BEWI
+# Source de vérité pour la validation et les outils CLI.
+# Toute modification doit rester cohérente avec LABELS.md.
+
+namespace: "r2bewi.io"
+
+# ── Ressources de calcul (obligatoires) ───────────────────────────────────────
+
+compute:
+  accelerator:
+    description: "Accélération matérielle principale disponible pour les workloads"
+    required: true
+    values:
+      - value: none
+        description: "Pas d'accélération spécifique"
+      - value: nvidia
+        description: "GPU NVIDIA disponible"
+      - value: intel
+        description: "GPU / accélération Intel disponible"
+
+  class:
+    description: "Classe générale de calcul du nœud"
+    required: true
+    values:
+      - value: micro
+        description: "Calcul embarqué très léger"
+      - value: embedded
+        description: "Calcul embarqué standard"
+      - value: general
+        description: "Calcul généraliste"
+      - value: high
+        description: "Calcul renforcé / intensif"
+
+  realtime:
+    description: "Nœud intégré pour héberger des workloads à contrainte temps réel"
+    required: true
+    values:
+      - value: "true"
+        description: "Usage temps réel / contrôle bas niveau prévu"
+      - value: "false"
+        description: "Pas d'usage temps réel prévu"
+
+# ── Équipements (optionnels, déclaratifs) ─────────────────────────────────────
+# Un label device.* n'est posé que si l'équipement est effectivement intégré.
+# L'absence d'un label device.* signifie absence dans l'inventaire R2BEWI.
+
+device:
+  camera:
+    description: "Système de caméra principal"
+    required: false
+    values:
+      - value: mono
+        description: "Caméra monoculaire"
+      - value: stereo
+        description: "Caméra stéréo"
+      - value: rgbd
+        description: "Caméra RGB-D"
+      - value: fisheye
+        description: "Caméra fisheye"
+      - value: tracking
+        description: "Caméra orientée suivi / tracking"
+
+  imu:
+    description: "Centrale inertielle"
+    required: false
+    values:
+      - value: global
+        description: "IMU principale du robot"
+      - value: local
+        description: "IMU locale à un sous-ensemble mécanique"
+      - value: integrated-camera
+        description: "IMU intégrée à un module caméra"
+      - value: integrated-lidar
+        description: "IMU intégrée à un module LiDAR"
+
+  lidar:
+    description: "Télémétrie laser"
+    required: false
+    values:
+      - value: 2d
+        description: "LiDAR 2D"
+      - value: 3d
+        description: "LiDAR 3D"
+      - value: solid-state
+        description: "LiDAR solid-state"
+
+  range:
+    description: "Télémétrie courte portée"
+    required: false
+    values:
+      - value: ultrasonic
+        description: "Télémétrie ultrason"
+      - value: infrared
+        description: "Télémétrie infrarouge"
+      - value: tof
+        description: "Time-of-Flight"
+
+  motor:
+    description: "Commande moteur principale"
+    required: false
+    values:
+      - value: dc
+        description: "Commande moteur DC"
+      - value: bldc
+        description: "Commande moteur brushless"
+      - value: servo
+        description: "Commande servo"
+      - value: stepper
+        description: "Commande moteur pas à pas"
+
+  encoder:
+    description: "Retour position / odométrie"
+    required: false
+    values:
+      - value: incremental
+        description: "Codeur incrémental"
+      - value: absolute
+        description: "Codeur absolu"
+      - value: multi-turn
+        description: "Codeur absolu multi-tour"
+
+  gnss:
+    description: "Localisation satellite"
+    required: false
+    values:
+      - value: standard
+        description: "GNSS standard"
+      - value: rtk
+        description: "GNSS RTK"
+
+  audio:
+    description: "Entrée / sortie audio"
+    required: false
+    values:
+      - value: microphone
+        description: "Entrée microphone"
+      - value: speaker
+        description: "Sortie haut-parleur"
+      - value: duplex
+        description: "Entrée/sortie audio"
+
+  display:
+    description: "Sortie vidéo / afficheur"
+    required: false
+    values:
+      - value: hdmi
+        description: "Affichage HDMI"
+      - value: dsi
+        description: "Affichage DSI"
+      - value: oled
+        description: "Petit afficheur OLED"
+      - value: lcd
+        description: "Afficheur LCD"

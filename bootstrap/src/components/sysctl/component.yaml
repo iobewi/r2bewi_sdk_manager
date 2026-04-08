@@ -1,0 +1,15 @@
+name: sysctl
+description: Paramètres noyau — ip_forward et autres réglages système
+kind: [server, agent]
+deploy_order: 15
+setup: setup.deploy
+defaults:
+  server:
+    - sysctl.conf
+node_files:
+  server:
+    sysctl.conf: /etc/sysctl.d/99-r2bewi.conf
+managed_paths:
+  server:
+    - /etc/sysctl.d/99-r2bewi.conf
+cli: {}

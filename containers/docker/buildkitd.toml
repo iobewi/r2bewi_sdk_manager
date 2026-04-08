@@ -1,0 +1,8 @@
+# Configuration buildkitd — registry HTTP interne R2BEWI
+# Utilisé par docker buildx pour autoriser le push vers un registry non-TLS.
+# registry.r2bewi.internal est résolu par dnsmasq vers le bastion.
+# Référencé par : make buildx-setup
+
+[registry."registry.r2bewi.internal:5000"]
+  http = true
+  insecure = true

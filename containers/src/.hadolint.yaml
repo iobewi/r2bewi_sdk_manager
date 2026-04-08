@@ -1,0 +1,18 @@
+# Configuration hadolint pour les Dockerfiles R2BEWI
+#
+# Règles ignorées :
+#   DL3008  — versions non épinglées dans apt-get install
+#             Les paquets ROS2 (ros-jazzy-*) n'ont pas de schéma de version
+#             stable à épingler dans ce contexte.
+#   DL3013  — versions non épinglées dans pip install
+#             onnxruntime-gpu et numpy sont contraints par la chaîne JetPack ;
+#             épingler des versions fixes crée plus de fragilité qu'elle n'en
+#             évite sur cette plateforme.
+#   SC1091  — fichier source non disponible au moment du lint
+#             Le source /opt/ros/jazzy/setup.bash est valide à l'exécution
+#             mais inaccessible lors de l'analyse statique.
+
+ignore:
+  - DL3008
+  - DL3013
+  - SC1091

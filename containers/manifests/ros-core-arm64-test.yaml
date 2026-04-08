@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ros-core-arm64-test
+  namespace: ros
+  labels:
+    app.kubernetes.io/managed-by: r2bewi
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      nodeSelector:
+        role: worker
+      restartPolicy: Never
+      containers:
+        - name: ros-core
+          image: registry.r2bewi.internal:5000/r2bewi/ros-core:latest
+          imagePullPolicy: Always
+          command:
+            - /ros_entrypoint.sh
+            - bash
+            - -c
+            - |
+              echo "arch: $(uname -m)"
+              ros2 pkg list | wc -l
+              echo "ROS2 OK"

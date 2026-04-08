@@ -1,0 +1,51 @@
+# Socle RBAC Headlamp ROS — déployé automatiquement par K3s
+# Déposé dans /var/lib/rancher/k3s/server/manifests/ par r2bewi bootstrap-server
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ros
+  labels:
+    app.kubernetes.io/managed-by: r2bewi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: headlamp-ros
+  namespace: ros
+  labels:
+    app.kubernetes.io/managed-by: r2bewi
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: headlamp-ros
+  namespace: ros
+  labels:
+    app.kubernetes.io/managed-by: r2bewi
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log", "services", "endpoints", "events", "configmaps", "persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: headlamp-ros
+  namespace: ros
+  labels:
+    app.kubernetes.io/managed-by: r2bewi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: headlamp-ros
+subjects:
+  - kind: ServiceAccount
+    name: headlamp-ros
+    namespace: ros

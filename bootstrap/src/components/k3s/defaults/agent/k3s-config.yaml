@@ -1,0 +1,6 @@
+# r2bewi — configuration K3s agent
+# __TOKEN__ est substitué par r2bewi init / deploy
+server: "https://k3s.r2bewi.internal:6443"
+token: "__TOKEN__"
+node-label:
+  - "role=worker"

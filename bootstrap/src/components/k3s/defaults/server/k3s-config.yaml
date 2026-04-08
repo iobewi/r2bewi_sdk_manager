@@ -1,0 +1,10 @@
+# r2bewi — configuration K3s server
+# __IP__ est substitué par r2bewi init
+tls-san:
+  - "k3s.r2bewi.internal"
+  - "__IP__"
+node-label:
+  - "role=control"
+disable:
+  - traefik
+write-kubeconfig-mode: "0644"

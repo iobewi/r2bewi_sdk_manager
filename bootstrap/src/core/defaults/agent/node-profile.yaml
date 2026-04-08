@@ -1,0 +1,24 @@
+# Profil matériel du nœud — R2BEWI
+# Remplir ce fichier avant d'exécuter : sudo r2bewi enroll __HOSTNAME__
+# Les valeurs autorisées sont définies dans catalog/labels.yaml
+
+# Ressources de calcul (obligatoire)
+compute:
+  # Valeurs : none, nvidia, intel
+  accelerator: ""
+  # Valeurs : micro, embedded, general, high
+  class: ""
+  # Valeurs : true, false
+  realtime: ""
+
+# Équipements intégrés (optionnel — ne déclarer que ce qui est présent)
+device:
+  # camera    : mono, stereo, rgbd, fisheye, tracking
+  # imu       : global, local, integrated-camera, integrated-lidar
+  # lidar     : 2d, 3d, solid-state
+  # range     : ultrasonic, infrared, tof
+  # motor     : dc, bldc, servo, stepper
+  # encoder   : incremental, absolute, multi-turn
+  # gnss      : standard, rtk
+  # audio     : microphone, speaker, duplex
+  # display   : hdmi, dsi, oled, lcd

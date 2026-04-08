@@ -1,0 +1,52 @@
+#!/bin/bash
+# r2bewi postinst — configuration système au moment de l'installation du package
+set -e
+
+# ── Répertoires ───────────────────────────────────────────────────────────────
+mkdir -p /etc/r2bewi/nodes
+mkdir -p /etc/r2bewi/templates
+chmod 755 /usr/bin/r2bewi
+
+# ── User iobewi ───────────────────────────────────────────────────────────────
+if ! id iobewi >/dev/null 2>&1; then
+    useradd -m -s /bin/bash -G sudo iobewi
+    passwd -l iobewi
+    echo "r2bewi: user 'iobewi' créé"
+fi
+
+# ── Sudoers iobewi — idempotent ───────────────────────────────────────────────
+SUDOERS_LINE="iobewi ALL=(ALL) NOPASSWD:ALL"
+SUDOERS_FILE="/etc/sudoers.d/r2bewi"
+if [ ! -f "$SUDOERS_FILE" ] || [ "$(cat "$SUDOERS_FILE")" != "$SUDOERS_LINE" ]; then
+    echo "$SUDOERS_LINE" > "$SUDOERS_FILE"
+    chmod 440 "$SUDOERS_FILE"
+    echo "r2bewi: sudo NOPASSWD configuré pour 'iobewi'"
+fi
+
+# ── Clé SSH ed25519 pour iobewi ───────────────────────────────────────────────
+IOBEWI_KEY="/home/iobewi/.ssh/id_ed25519"
+if [ ! -f "$IOBEWI_KEY" ]; then
+    mkdir -p /home/iobewi/.ssh
+    chmod 700 /home/iobewi/.ssh
+    ssh-keygen -t ed25519 -N "" -C "iobewi@r2bewi" -f "$IOBEWI_KEY" -q
+    chown -R iobewi:iobewi /home/iobewi/.ssh
+    echo "r2bewi: clé SSH iobewi générée"
+fi
+
+# ── Clé SSH ed25519 pour root (enrôlement agents) ────────────────────────────
+ROOT_KEY="/root/.ssh/id_ed25519"
+if [ ! -f "$ROOT_KEY" ]; then
+    mkdir -p /root/.ssh
+    chmod 700 /root/.ssh
+    ssh-keygen -t ed25519 -N "" -C "r2bewi-enroll" -f "$ROOT_KEY" -q
+    echo "r2bewi: clé SSH root générée"
+fi
+
+# ── Services système ──────────────────────────────────────────────────────────
+systemctl enable dnsmasq      2>/dev/null || true
+systemctl enable avahi-daemon 2>/dev/null || true
+
+echo "r2bewi: installation terminée"
+echo "r2bewi: lancer : sudo r2bewi init <hostname> --kind server"
+
+exit 0

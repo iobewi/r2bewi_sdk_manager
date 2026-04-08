@@ -1,0 +1,17 @@
+name: chrony
+description: Synchronisation NTP — serveur de temps pour le LAN robot
+kind: [server]
+deploy_order: 30
+setup: setup.deploy
+defaults:
+  server:
+    - chrony.conf
+packages:
+  - chrony
+node_files:
+  server:
+    chrony.conf: /etc/chrony/chrony.conf
+managed_paths:
+  server:
+    - /etc/chrony/chrony.conf
+cli: {}
