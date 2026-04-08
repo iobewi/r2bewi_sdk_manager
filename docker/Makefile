@@ -43,6 +43,7 @@ build:
 	@for svc in $(SERVICES); do \
 		echo "[build] $$svc → $(REGISTRY)/r2bewi/$$svc:$(IMAGE_TAG)"; \
 		docker build \
+			--build-arg REGISTRY=$(REGISTRY) \
 			-t $(REGISTRY)/r2bewi/$$svc:$(IMAGE_TAG) \
 			$(MODULE)/ros/$$svc; \
 	done
@@ -94,5 +95,6 @@ build-arm64: buildx-setup
 		--builder $(BUILDX_BUILDER) \
 		--platform $(PLATFORM) \
 		--provenance=false \
+		--build-arg REGISTRY=$(REGISTRY) \
 		--output type=image,name=$(REGISTRY)/r2bewi/$(ARM64_SVC):$(IMAGE_TAG),push=true,compression=gzip,oci-mediatypes=false \
 		$(MODULE)/ros/$(ARM64_SVC)

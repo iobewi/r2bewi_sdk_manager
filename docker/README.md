@@ -23,7 +23,7 @@ docker/
 | Image | Base | Cible | Description |
 |---|---|---|---|
 | `core` | `ros:jazzy` | Bastion x86 | Services ROS2 centraux et socle commun |
-| `motion` | `ros:jazzy` | ARM | Commande moteur, actionneurs et interfaces matérielles |
+| `motion` | `r2bewi/core` | ARM | Commande moteur, actionneurs et interfaces matérielles |
 | `perception` | `nvcr.io/nvidia/l4t-pytorch` | ARM + GPU | Acquisition caméra, traitement image, inférence GPU |
 
 Les images sont publiées sous la forme :
@@ -38,7 +38,7 @@ graph TD
     L4T["nvcr.io/nvidia/l4t-pytorch"]
 
     JAZZY --> CORE["core — services ROS2 centraux"]
-    JAZZY --> MOTION["motion — commande et I/O"]
+    CORE --> MOTION["motion — commande et I/O"]
     L4T --> PERCEPTION["perception — caméra, inférence GPU"]
 ```
 
