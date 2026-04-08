@@ -49,3 +49,4 @@ Utiliser cette variable dans tous les `importlib.import_module` — ne jamais ha
 - `docs/runbook.md` — procédure d'installation bastion + nœuds
 - `docs/labels.md` — convention labels K3s `r2bewi.io/`
 - `docs/whitebook.md` — vision architecture
+- `docs/zenoh-k3s.md` — topologie middleware Zenoh + K3s

@@ -145,4 +145,5 @@ make -C docker push
 - [`docs/runbook.md`](docs/runbook.md) — procédure complète d'installation
 - [`docs/labels.md`](docs/labels.md) — convention de labels K3s `r2bewi.io/`
 - [`docs/whitebook.md`](docs/whitebook.md) — vision architecture R2BEWI
+- [`docs/zenoh-k3s.md`](docs/zenoh-k3s.md) — topologie middleware Zenoh + K3s
 - [`docs/contributing.md`](docs/contributing.md) — standards code, tests, hooks pré-commit
